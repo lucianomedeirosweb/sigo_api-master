@@ -1,6 +1,10 @@
 package br.com.cagepa.sigo.api.controller;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,11 +20,10 @@ public class OcorrenciaController {
 	@Autowired
 	OcorrenciaService ocorrenciaService;
 	
-	@RequestMapping(method=RequestMethod.POST, value="/cadastrar")
+	@RequestMapping(method=RequestMethod.POST, value="/cadastrarOcorrencia")
 	public Ocorrencia cadastrarOcorrencia(@RequestBody Ocorrencia ocorrencia) {
 		
-			System.out.println(ocorrencia.getDescricao());
-			
+		
 			Ocorrencia retorno = ocorrenciaService.cadastrar(ocorrencia);
 			
 			return retorno;
@@ -33,5 +36,9 @@ public class OcorrenciaController {
 		System.out.println("parametro: " + teste);
 		
 	}
+	
+	
+
+	
 
 }

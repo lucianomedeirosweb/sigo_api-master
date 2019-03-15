@@ -3,6 +3,7 @@ package br.com.cagepa.sigo.api.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import antlr.collections.List;
 import br.com.cagepa.sigo.api.modelo.Ocorrencia;
 import br.com.cagepa.sigo.api.repository.OcorrenciaRepository;
 import br.com.cagepa.sigo.api.service.OcorrenciaService;
@@ -17,5 +18,8 @@ public class OcorrenciaServiveImpl implements OcorrenciaService{
 	public Ocorrencia cadastrar(Ocorrencia ocorrencia) {
 		return ocorrenciaRepository.save(ocorrencia);
 	}
+	
 
+
+	
 }

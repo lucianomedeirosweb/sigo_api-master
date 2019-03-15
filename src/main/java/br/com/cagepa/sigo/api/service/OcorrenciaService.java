@@ -6,4 +6,5 @@ public interface OcorrenciaService{
 	
 	public Ocorrencia cadastrar(Ocorrencia ocorrencia);
 
+	
 }
