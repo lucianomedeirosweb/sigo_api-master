@@ -11,11 +11,13 @@ import br.com.cagepa.sigo.api.modelo.Ocorrencia;
 @Repository
 public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long>{
 	
-	List<Ocorrencia> findAll();
+	List<Ocorrencia> findAll();	
 	
-	Optional<Ocorrencia> findById(Long id);
 	
-	List<Ocorrencia> findByDescricao(String descricao);
+	Ocorrencia findByDescricao(String descricao);
 	
+	Ocorrencia getProductById(Long Id);
+	
+
 
 }

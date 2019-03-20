@@ -55,7 +55,8 @@ public class Ocorrencia {
 	}
 
 	
-	
+	public Ocorrencia() {  
+	} 
 
 	
 	

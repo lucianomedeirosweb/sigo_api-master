@@ -1,5 +1,7 @@
 package br.com.cagepa.sigo.api.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,21 @@ public class OcorrenciaServiveImpl implements OcorrenciaService{
 		return ocorrenciaRepository.save(ocorrencia);
 	}
 	
+
+	
+	@Override
+    public Optional<Ocorrencia> getProductById(Long id) {
+        return ocorrenciaRepository.findById(id);
+    }
+	
+	
+	  @Override
+	    public Optional<Ocorrencia> getProductByIds(Long id) {
+	        return ocorrenciaRepository.findById(id);
+	    }
+	  
+	  
+
 
 
 	
