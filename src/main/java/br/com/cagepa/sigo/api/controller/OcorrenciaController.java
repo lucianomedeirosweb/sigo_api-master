@@ -1,11 +1,10 @@
 package br.com.cagepa.sigo.api.controller;
 
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,14 +12,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.com.cagepa.sigo.api.modelo.Ocorrencia;
 import br.com.cagepa.sigo.api.service.OcorrenciaService;
+import lombok.Getter;
+import lombok.Setter;
 
-@RestController()
+@RestController
+@Getter 
+@Setter
 public class OcorrenciaController {
 	
 	@Autowired
-	OcorrenciaService ocorrenciaService;
+	private OcorrenciaService ocorrenciaService;
 	
 	
 	
@@ -42,23 +47,32 @@ public class OcorrenciaController {
 	}
 	
 	
-	 @RequestMapping(method=RequestMethod.POST,value="ocorrencias/{id}")
-	    public Optional<Ocorrencia> MostraOcorrencias(@PathVariable Long id, Model model) {
+	 	@RequestMapping(method=RequestMethod.GET,
+	 			value="ocorrencias/{id}",
+	 			produces=org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	    public ResponseEntity<Ocorrencia> MostraOcorrencias(@PathVariable(value="id", required=true) Long id) {
 		 
-		 Optional<Ocorrencia> ocorrencia = ocorrenciaService.getProductByIds(id);
-	        return ocorrencia;
+		 if(id < 0 ) { 
+			 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		 }
+		 try {
+			 Ocorrencia ocorrencia = ocorrenciaService.getProductByIds(id).get();
+			 //ObjectMapper mapper = new ObjectMapper();
+			 
+			 
+			 return new ResponseEntity<Ocorrencia>(ocorrencia, HttpStatus.OK);
+		 }catch(NoSuchElementException e) {
+			 e.printStackTrace();
+			 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		 }catch(Exception e ) { 
+			 e.printStackTrace();
+			 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		 }
+	        
 	    }
 	 
 	 	 
-	 
-	 @RequestMapping(method=RequestMethod.POST,value="ocorrencia/{id}")
-	    public String MostraOcorrencia(@PathVariable Long id, Model model) {
-		 
-	        model.addAttribute("Ocorrencia", ocorrenciaService.getProductById(id));
-	       return "Ocorrencia";
-	    }
-	 
-	 
+
 
 
 
