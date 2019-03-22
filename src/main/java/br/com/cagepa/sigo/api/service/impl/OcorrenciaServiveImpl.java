@@ -35,8 +35,11 @@ public class OcorrenciaServiveImpl implements OcorrenciaService{
 	    }
 	  
 	  
+	  public void deletar(Long codigo) {
+		  ocorrenciaRepository.deleteById(codigo);
+		}
 	  
-	  
+
 
 
 

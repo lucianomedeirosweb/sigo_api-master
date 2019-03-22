@@ -17,11 +17,8 @@ public interface OcorrenciaService{
 
 	public Optional<Ocorrencia> getProductByIds(Long id);
 
+	public void deletar(Long id);
 
-	
-	
-
-	
 	
 	
 	
