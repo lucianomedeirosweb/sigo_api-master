@@ -3,6 +3,7 @@ package br.com.cagepa.sigo.api.service.impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import antlr.collections.List;
@@ -14,7 +15,7 @@ import br.com.cagepa.sigo.api.service.OcorrenciaService;
 public class OcorrenciaServiveImpl implements OcorrenciaService{
 
 	@Autowired
-	OcorrenciaRepository ocorrenciaRepository;
+	private OcorrenciaRepository ocorrenciaRepository;
 	
 	@Override
 	public Ocorrencia cadastrar(Ocorrencia ocorrencia) {
@@ -29,16 +30,30 @@ public class OcorrenciaServiveImpl implements OcorrenciaService{
     }
 	
 	
-	  @Override
-	    public Optional<Ocorrencia> getProductByIds(Long id) {
-	        return ocorrenciaRepository.findById(id);
-	    }
-	  
+	
 	  
 	  public void deletar(Long codigo) {
 		  ocorrenciaRepository.deleteById(codigo);
 		}
-	  
+
+
+	  @Override
+	    public Optional<Ocorrencia> getProductByIds(Long id) {
+	        return ocorrenciaRepository.findById(id);
+	    }
+
+
+
+	@Override
+	public java.util.List<Ocorrencia> findAllByEndereco(String endereco) {
+
+		return ocorrenciaRepository.findByEndereco(endereco);
+	}
+
+
+
+
+	
 
 
 

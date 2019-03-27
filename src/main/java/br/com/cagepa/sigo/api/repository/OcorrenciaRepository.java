@@ -12,6 +12,9 @@ import br.com.cagepa.sigo.api.modelo.Ocorrencia;
 @Repository
 public interface OcorrenciaRepository extends JpaRepository<Ocorrencia, Long>{
 	
-
+	
+	public List<Ocorrencia> findByEndereco(String endereco);
+	
+	
 
 }

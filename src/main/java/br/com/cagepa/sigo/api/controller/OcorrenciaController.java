@@ -1,5 +1,6 @@
 package br.com.cagepa.sigo.api.controller;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -42,7 +43,7 @@ public class OcorrenciaController {
 
 	// CAGEPA - SIGO - Listando a Ocorrência
 	@RequestMapping(method = RequestMethod.GET, value = "listarOcorrencia/{id}", produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Ocorrencia> MostraOcorrencias(@PathVariable(value = "id", required = true) Long id) {
+	public ResponseEntity<Ocorrencia> mostraOcorrencias(@PathVariable(value = "id", required = true) Long id) {
 
 		if (id < 0) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -62,9 +63,37 @@ public class OcorrenciaController {
 
 	}
 	
+	
+	// CAGEPA - SIGO - Listando a Ocorrência
+	@RequestMapping(method = RequestMethod.GET, value = "listarOcorrencia/endereco/buscar/{endereco}", produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Ocorrencia>> mostraOcorrencias(@PathVariable(value = "endereco", required = true) String endereco) {
+
+		if (endereco == null|| endereco.trim().isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		try {
+			List<Ocorrencia> ocorrencia = ocorrenciaService.findAllByEndereco(endereco);
+			if(ocorrencia == null || ocorrencia.isEmpty()) { 
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+
+			return new ResponseEntity<List<Ocorrencia>>(ocorrencia, HttpStatus.OK);
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	
+
+	
 	// CAGEPA - SIGO - Atualizar Ocorrencia
 	@PutMapping("/atualizarOcorrencia/{id}")
-	public ResponseEntity<Object> AtualizarOcorrencia(@RequestBody Ocorrencia ocorrencia, @PathVariable long id) {
+	public ResponseEntity<Object> atualizarOcorrencia(@RequestBody Ocorrencia ocorrencia, @PathVariable long id) {
 
 		Optional<Ocorrencia> ocorrenciaOptional = ocorrenciarepository.findById(id);
 
