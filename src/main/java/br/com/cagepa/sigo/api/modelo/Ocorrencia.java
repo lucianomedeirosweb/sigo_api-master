@@ -5,16 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name="ocorrencia")
-
-
 public class Ocorrencia {
 	
 	
@@ -28,8 +24,9 @@ public class Ocorrencia {
 	@Column(name="tipo")
 	private String tipo;
 	
-	@Column(name="endereco")
-	private String endereco;
+	@OneToOne
+	@JoinColumn(name="idendereco")
+	private Endereco endereco;
 	
 	@Column(name="atuacao")
 	private String atuacao;
@@ -45,7 +42,7 @@ public class Ocorrencia {
 	
 	
 	
-	public Ocorrencia(Long id, String descricao, String tipo, String endereco, String atuacao, double latitude, double
+	public Ocorrencia(Long id, String descricao, String tipo, Endereco endereco, String atuacao, double latitude, double
 			longitude, double coordenada) {
 		super();
 		this.id = id;
@@ -86,14 +83,6 @@ public class Ocorrencia {
 		this.tipo = tipo;
 	}
 
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-
 	public String getAtuacao() {
 		return atuacao;
 	}
@@ -126,10 +115,13 @@ public class Ocorrencia {
 		this.coordenada = coordenada;
 	}
 
+	public Endereco getEndereco() {
+		return endereco;
+	}
 
-	
-
-	
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 	
 	
 }

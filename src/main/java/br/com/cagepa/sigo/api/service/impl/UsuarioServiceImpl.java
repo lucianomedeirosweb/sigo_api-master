@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.cagepa.sigo.api.modelo.Ocorrencia;
 import br.com.cagepa.sigo.api.modelo.Usuario;
 import br.com.cagepa.sigo.api.repository.UsuarioRepository;
 import br.com.cagepa.sigo.api.service.UsuarioService;

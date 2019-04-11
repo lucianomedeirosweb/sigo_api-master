@@ -12,7 +12,7 @@ import br.com.cagepa.sigo.api.modelo.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	
 		
-List<Usuario> findAll();
+	List<Usuario> findAll();
 	
 	Optional<Usuario> findById(Long id);
 	
